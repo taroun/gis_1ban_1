@@ -8,5 +8,12 @@ from django.shortcuts import render
 #    return HttpResponse('Hello World!')
 
 #html을 가져오기
+#분기점 생성
+#render에 추가정보 보내주기 text객체에 접근 가능함
 def hello_world(request):
-    return render(request, 'accountapp/hello_world.html')
+    if request.method == 'POST':
+        return render(request, 'accountapp/hello_world.html',
+                      context={'text': 'POST METHOD'})
+    else:
+        return render(request, 'accountapp/hello_world.html',
+                      context={'text': 'GET METHOD'})
