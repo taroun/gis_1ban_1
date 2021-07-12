@@ -21,9 +21,15 @@ def hello_world(request):
         new_hello_world = HelloWorld()
         new_hello_world.text = temp
         new_hello_world.save()
+        
+        #select라고 생각하면됨.
+        hello_world_list = HelloWorld.objects.all()
+        #팁 shift+f6 같이 수정
+        #get방식에도...
 
         return render(request, 'accountapp/hello_world.html',
-                      context={'hello_world_output': new_hello_world})
+                      context={'hello_world_list': hello_world_list})
     else:
+        hello_world_list = HelloWorld.objects.all()
         return render(request, 'accountapp/hello_world.html',
-                      context={'text': 'GET METHOD'})
+                      context={'hello_world_list': hello_world_list})
