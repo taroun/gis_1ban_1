@@ -13,7 +13,7 @@ from django.shortcuts import render
 #분기점 생성
 #render에 추가정보 보내주기 text객체에 접근 가능함
 from django.urls import reverse, reverse_lazy
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView, DetailView, UpdateView
 
 from accountapp.models import HelloWorld
 
@@ -52,3 +52,10 @@ class AccountDetailView(DetailView):
     #보고자하는 유저
     context_object_name = 'target_user'
     template_name = 'accountapp/detail.html'
+
+class AccountUpdateView(UpdateView):
+    model = User
+    form_class = UserCreationForm
+    context_object_name = 'target_user'
+    success_url = reverse_lazy('accountapp:hello_world')
+    template_name = 'accountapp/update.html'
