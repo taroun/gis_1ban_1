@@ -13,7 +13,7 @@ from django.shortcuts import render
 #분기점 생성
 #render에 추가정보 보내주기 text객체에 접근 가능함
 from django.urls import reverse, reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView
 
 from accountapp.models import HelloWorld
 
@@ -46,3 +46,9 @@ class AccountCreateView(CreateView):
     #회원가입 페이지
     template_name = 'accountapp/create.html'
     #어떤 페이지로 들어가야.라우팅..
+
+class AccountDetailView(DetailView):
+    model = User
+    #보고자하는 유저
+    context_object_name = 'target_user'
+    template_name = 'accountapp/detail.html'
