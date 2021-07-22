@@ -22,9 +22,8 @@ from accountapp.forms import AccountCreationForm
 from accountapp.models import HelloWorld
 
 #경로 변경 가능...
-@login_required()
+@login_required
 def hello_world(request):
-#로그인 여부확인..
     if request.method == 'POST':
 
         temp = request.POST.get('hello_world_input')
