@@ -46,11 +46,10 @@ def hello_world(request):
 class AccountCreateView(CreateView):
     model = User
     form_class = UserCreationForm
-    #클래스에서는 reverse_lazy로.. 불러오는 방식이 달라서..
-    success_url = reverse_lazy('accountapp:hello_world')
-    #회원가입 페이지
     template_name = 'accountapp/create.html'
-    #어떤 페이지로 들어가야.라우팅..
+
+    def get_success_url(self):
+        return reverse('accountapp:detail', kwargs={'pk': self.object.pk})  #self.object-target_user 여기선 target_user라서
 
 class AccountDetailView(DetailView):
     model = User
@@ -66,8 +65,11 @@ class AccountUpdateView(UpdateView):
     model = User
     form_class = AccountCreationForm
     context_object_name = 'target_user'
-    success_url = reverse_lazy('accountapp:hello_world')
     template_name = 'accountapp/update.html'
+
+    def get_success_url(self):
+        return reverse('accountapp:detail', kwargs={'pk': self.object.pk})  #self.object-target_user 여기선 target_user라서
+
 
 @method_decorator(has_ownership, 'get')
 @method_decorator(has_ownership, 'post')
