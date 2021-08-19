@@ -16,12 +16,16 @@ from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
+from django.views.generic.list import MultipleObjectMixin
 
 from accountapp.decorators import account_ownership_required
 from accountapp.forms import AccountCreationForm
 from accountapp.models import HelloWorld
 
 #경로 변경 가능...
+from articleapp.models import Article
+
+
 @login_required
 def hello_world(request):
     if request.method == 'POST':
@@ -51,11 +55,17 @@ class AccountCreateView(CreateView):
     def get_success_url(self):
         return reverse('accountapp:detail', kwargs={'pk': self.object.pk})  #self.object-target_user 여기선 target_user라서
 
-class AccountDetailView(DetailView):
+class AccountDetailView(DetailView,MultipleObjectMixin):
     model = User
     #보고자하는 유저
     context_object_name = 'target_user'
     template_name = 'accountapp/detail.html'
+
+    paginate_by = 20
+
+    def get_context_data(self, **kwargs):
+        article_list = Article.objects.filter(writer=self.object)
+        return super().get_context_data(object_list=article_list, **kwargs)
 
 has_ownership = [login_required, account_ownership_required]
 
