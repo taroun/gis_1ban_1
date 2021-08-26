@@ -1,16 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
-from django.shortcuts import render
 
 # Create your views here.
-#alt+enter 하면.... 뜸..
 
 
-#html을 가져오기
-#분기점 생성
-#render에 추가정보 보내주기 text객체에 접근 가능함
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
@@ -18,12 +12,8 @@ from django.views.generic.list import MultipleObjectMixin
 
 from accountapp.decorators import account_ownership_required
 from accountapp.forms import AccountCreationForm
-from accountapp.models import HelloWorld
 
-#경로 변경 가능...
 from articleapp.models import Article
-
-
 
 class AccountCreateView(CreateView):
     model = User
