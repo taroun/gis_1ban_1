@@ -26,9 +26,6 @@ def db_transaction(user, article):
     else:
         LikeRecord(user=user, article=article).save()
 
-
-
-
 @method_decorator(login_required, 'get')
 class LikeArticleView(RedirectView):
 
@@ -42,8 +39,6 @@ class LikeArticleView(RedirectView):
         except ValidationError:
             messages.add_message(request, messages.ERROR, '좋아요는 한번만 가능합니다.')
             return HttpResponseRedirect(reverse('articleapp:detail', kwargs={'pk': kwargs['article_pk']}))
-
-
 
         return super().get(request, *args, **kwargs)
 
