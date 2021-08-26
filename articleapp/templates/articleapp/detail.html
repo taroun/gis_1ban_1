@@ -24,9 +24,11 @@
         <hr>
         <div class="my-5">
             {# 게시글 내용 #}
-            <img src="{{ target_article.image.url }}"
-                 alt=""
-                 class="article_image">
+            {% if target_article.image %}
+                <img src="{{ target_article.image.url }}"
+                     alt=""
+                     class="article_image">
+            {% endif %}
             <div class="article_content">
                 {{ target_article.content | safe }}
             </div>
