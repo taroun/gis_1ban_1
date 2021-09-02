@@ -29,12 +29,18 @@
     <div class="container my-3">
 
         {% for article in article_list %}
-
             <div>
-                <a href="{% url 'articleapp:detail' pk=article.pk %}">
-                    <img src="{{ article.image.url }}" alt="">
+                <a href="{% url 'articleapp:detail' pk=article.pk %}" >
+                    {% if article.image %}
+                        <img src="{{ article.image.url }}" alt="">
+                    {% endif %}
+
                 </a>
-                <span class="NNS_B m-2">{{ article.title }}</span>
+                <span class="NNS_B m-2">
+                    <a href="{% url 'articleapp:detail' pk=article.pk %}" >
+                        {{ article.title }}
+                    </a>
+                </span>
             </div>
 
         {% endfor %}
