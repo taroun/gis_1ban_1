@@ -36,7 +36,7 @@ class ProjectDetailView(DetailView, MultipleObjectMixin):
 
         if user.is_authenticated:
             subscription = Subscription.objects.filter(user=user,
-                                                       project=project)
+                                                       project=project).order_by('id')
         else:
             subscription = None
 

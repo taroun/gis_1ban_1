@@ -18,7 +18,7 @@ class SubscriptionView(RedirectView):
         project = Project.objects.get(pk=kwargs['project_pk'])
 
         subscription = Subscription.objects.filter(user=user,
-                                                   project=project)
+                                                   project=project).order_by('id')
 
         if subscription.exists():
             subscription.delete()
