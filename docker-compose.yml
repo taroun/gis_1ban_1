@@ -2,5 +2,5 @@ version: "3.7"
 services:
   django:
     image: taroun_1ban_django:1
-    prots:
+    ports:
       - 8080:8000
