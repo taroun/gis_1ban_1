@@ -3,4 +3,4 @@ services:
   django:
     image: taroun_1ban_django:1
     prots:
-      - 8080:8000
+      -  8080:8000
