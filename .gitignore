@@ -86,3 +86,5 @@ media/
 staticfiles/
 
 taroun_1ban.pem
+
+docker-compose.yml
